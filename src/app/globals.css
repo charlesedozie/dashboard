@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tailwindcss";
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Default site-wide typography */
+@layer base {
+  h1 {
+    @apply text-4xl sm:text-5xl font-bold;
+  }
+  h2 {
+    @apply text-3xl sm:text-4xl font-semibold;
+  }
+  h3 {
+    @apply text-2xl sm:text-3xl font-semibold;
+  }
+  h4 {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium;
+  }
+  h5 {
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl font-medium;
+  }
+  h6 {
+    @apply text-sm sm:text-base md:text-lg lg:text-xl font-medium;
+  }
+  p {
+    @apply text-base sm:text-lg;
+  }
+}
+
+.silver {color: #A2A2A2;}
+.g-gray {color: #7E7D80; }
+.g-alert-success {width: 65;
+height: 22;
+angle: 0 deg;
+opacity: 1;
+border-radius: 16px;
+gap: 6px;
+padding-top: 2px;
+padding-right: 8px;
+padding-bottom: 2px;
+padding-left: 6px;
+background-color: #ECFDF3;
+color: #027A48;
+}
+
+
+.blackBg {background-color: #252525;}
+.sectionBg {@apply bg-gray-200;}
+.g-black {color: #141414;}
+:root {
+--background: #ffffff;
+--foreground: #171717;
+}
+
+@theme inline {
+--color-background: var(--background);
+--color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+--background: #ffffff;
+--foreground: #000000;
+}
+}
+
+
+.footerBg {background: linear-gradient(137.51deg, #344D99 14.39%, #02040C 128.7%);}
+body {
+width: 100%;
+margin: 0;
+padding: 0;
+
+background: var(--background);
+color: var(--foreground);
+overflow-x: hidden; /* Prevents sideways scroll if something overflows */
+}
+
+.def-color {color: #14265C; }
+.def-bg {background-color: #14265C; }
+.g-orange {color: #FF8511}
+.def-link-style {
+text-decoration: none;         /* No underline */
+font-weight: inherit;         /* Normal weight */
+color: inherit;                /* Inherit text color */
+font-family: inherit;          /* Inherit font type */
+}
+
+.def-link-style:hover {
+  text-decoration: none;   /* keep underline on hover */
+  opacity: 0.8;                 /* makes the link look faint/dim */
+  font-weight: normal;          /* remove bold on hover */
+}
+
+
+.pointer {cursor: pointer;}
+.topBg {background-color:#F2F5F8;}
+
+
+@media (min-width: 800px) {
+  .topNavDTop {
+    display: block; /* or flex or whatever */
+  }
+  .topNavMobile {
+    display: none; /* or flex or whatever */
+  }
+}
+
+@media (max-width: 799.98px) {
+  .topNavDTop {
+    display: none;
+  }
+  .topNavMobile {
+    display: block; /* or flex or whatever */
+  }
+}
+
+
+
+@media (min-width: 1024px) {
+  .hmCover {
+    display: block; /* or flex or whatever */
+  }
+    .hmCover1 {
+    display: none; /* or flex or whatever */
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .hmCover {
+    display: none;
+  }
+  .hmCover1 {
+    display: block;
+  }
+}
+

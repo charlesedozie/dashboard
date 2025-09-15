@@ -1,0 +1,207 @@
+"use client";
+import React, { ReactElement } from "react";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Mail, Phone, FolderPen } from "lucide-react";
+
+type FormValues = {
+  profilePicture?: FileList;
+  email?: string;
+};
+
+interface ProfilePictureFormProps {
+  currentImageUrl: string;
+  uid?: string;
+}
+
+interface EmailUpdateFormProps {
+  currentEmail: string;
+  currentValue?: string;
+  label?: string;
+  icon?: string;
+  tagLine?: string;
+  inputType?: string;
+  onSubmitEmail: (email: string) => Promise<void> | void;
+}
+
+export function ProfilePicture({
+  currentImageUrl,
+  uid = "default-uid",
+}: ProfilePictureFormProps) {
+  const [preview, setPreview] = useState<string>(currentImageUrl);
+  const [uploadStat, setUploadStat] = useState('');
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
+
+
+  const onSubmit = async (data: FormValues) => {
+    if (!data.profilePicture || data.profilePicture.length === 0) return;
+
+    const formData = new FormData();
+    formData.append("profilePicture", data.profilePicture[0]);
+    formData.append("uid", uid);
+
+    try {
+      const response = await fetch("/api/upload-profile", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Upload failed");
+	  setUploadStat(`<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <span class="font-medium">Profile picture updated!</span>
+</div>`);
+    } catch (err) {
+      console.error(err);
+	  setUploadStat(`<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+  <span class="font-medium">Error uploading profile picture.!</span>
+</div>`);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex items-center justify-between bg-white"
+    >
+      {/* Left side: Current profile picture & upload */}
+      <div className="flex flex-col items-start gap-2">
+        <div className="flex items-center gap-4">
+          <div><img
+            src={preview}
+            alt="Current Profile"
+            className="w-20 h-20 rounded-full object-cover border border-gray-300"
+          /></div>
+		  
+		  <div>
+		  <p>Profile Picture </p>
+		  <section className='g-orange text-xs'>JPG, GIF or PNG. 1MB max.</section>
+		  <section>
+          <input
+            type="file"
+            accept="image/*"
+            {...register("profilePicture", {
+              required: "Please select a profile picture",
+            })}
+            onChange={(e) => {
+              if (e.target.files?.[0]) {
+                setPreview(URL.createObjectURL(e.target.files[0]));
+              }
+            }}
+            className="block text-xs text-gray-700 pointer"
+          /></section>
+		  </div>
+        </div>
+
+        {/* Error message below upload input */}
+		<section dangerouslySetInnerHTML={{ __html: uploadStat }} />
+        {errors.profilePicture && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.profilePicture.message}
+          </p>
+        )}
+      </div>
+
+      {/* Right side: Submit button */}
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="bg-[#C4E9FD] font-medium text-sm px-4 py-2 rounded-3xl pointer hover:bg-blue-200 disabled:opacity-50"
+      >
+        {isSubmitting ? "Uploading..." : "Upload New"}
+      </button>
+    </form>
+  );
+}
+
+
+export function EmailUpdate({
+  currentEmail,
+  label,
+  tagLine,
+  onSubmitEmail,
+  inputType,
+  icon,
+}: EmailUpdateFormProps) {
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: { email: currentEmail },
+  });
+
+
+
+
+const onSubmit = async (data: FormValues) => {
+  setLoading(true);
+  if (data.email) {
+    await onSubmitEmail(data.email);
+  } else {
+    console.error("Email is missing!");
+  }
+  setLoading(false);
+};
+
+
+
+
+type IconMap = {
+  [key: string]: ReactElement; // ✅ Use ReactElement instead of JSX.Element
+};
+
+const icons: IconMap = {
+  mail: <Mail className="def-color" size={30} />,
+  phone: <Phone className="def-color" size={30} />,
+  name: <FolderPen className="def-color" size={30} />,
+};
+
+const IconToRender = icons[icon ?? ""] || icons.mail;
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex items-center gap-4 bg-white"
+    >
+      {/* Left: Icon + Label + Description + Current Email */}
+      <div className="flex-1 flex flex-col gap-1">
+        <div className="flex gap-4">{IconToRender}
+          <div>{label ? <p className="block font-medium text-gray-800 mb-1">
+              {label}
+            </p> : null}
+            {label ? <p className="block font-medium text-gray-800 mb-1">
+              <span className="block text-xs text-gray-500">
+              {tagLine}
+            </span>
+            </p> : null}
+            
+          </div>
+        </div>
+        <span className="text-gray-700 text-sm mt-1"></span>
+      </div>
+
+      {/* Right: Input + Button */}
+      <div className="flex items-center gap-2 flex-1 justify-end">
+        <input
+          type={inputType ?? "text"}
+          {...register("email", { required: "Email is required" })}
+          className="border border-gray-300 rounded-xl px-3 py-1 w-48 text-base focus:outline-none focus:ring-2 text-gray-500"
+          placeholder={currentEmail ?? ""}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-[#C4E9FD] font-medium text-sm px-4 py-2 rounded-3xl pointer hover:bg-blue-200 disabled:opacity-50"
+        >
+          {loading ? "Updating..." : "Update"}
+        </button>
+      </div>
+    </form>
+  );
+}
