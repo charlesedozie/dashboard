@@ -309,7 +309,7 @@ const formFields: InputField[] =
 [
 {
 name: 'fullName',
-label: 'Tutor Name',
+label: 'Name',
 type: 'text',
 placeholder: 'Enter name',
 required: true,
@@ -318,7 +318,7 @@ defVal: items?.fullName ?? null,
 },
 {
 name: 'gender',
-label: 'Tutor Gender',
+label: 'Gender',
 type: 'select',
 required: true,
 className: 'w-full',
@@ -330,7 +330,7 @@ options: [
 },
 {
 name: 'email',
-label: 'Tutor Email',
+label: 'Email',
 type: 'email',
 placeholder: 'Enter email',
 required: true,
@@ -339,7 +339,7 @@ defVal: items?.email ?? null,
 },
 {
 name: 'phone',
-label: 'Tutor Phone Number',
+label: 'Phone Number',
 type: 'text',
 placeholder: 'Enter phone number',
 required: true,
@@ -348,7 +348,7 @@ defVal: items?.phone ?? null,
 },
 {
 name: "subjects",
-label: "Select Tutor Subjects (Control Select for Multiple)",
+label: "Select Subjects (Control Select for Multiple)",
 type: "select",
 multiple: true,  // ✅ multiple selection enabled
 required: true,
