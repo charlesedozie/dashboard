@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@tailwind components;
+@tailwind utilities;
+
+
+/* ===== BASE STYLES ===== */
+html, body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+:root {
+  --base-font-size: 16px;
+}
+
+@layer base {
+  h1 {
+    font-size: calc(var(--base-font-size) * 2.25);
+  }
+  h2 {
+    font-size: calc(var(--base-font-size) * 2);
+  }
+  h3 {
+    font-size: calc(var(--base-font-size) * 1.75);
+  }
+  h4 {
+    font-size: calc(var(--base-font-size) * 1.5);
+  }
+  h5 {
+    font-size: calc(var(--base-font-size) * 1.25);
+  }
+  h6 {
+    font-size: calc(var(--base-font-size) * 1.1);
+  }
+  p, span, div, li, a, button, input {
+    font-size: var(--base-font-size);
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+
+/* ===== DARK MODE VARIABLES ===== */
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+
+/* ===== CUSTOM CLASSES ===== */
+.sectionBg { background-color: #e5e7eb; } /* gray-200 */
+.dark .sectionBg { background-color: #1f2937; } /* gray-800 */
+
+.blackBg { background-color: #252525; }
+.footerBg { background: linear-gradient(137.51deg, #344D99 14.39%, #02040C 128.7%); }
+
+/* ===== TEXT COLORS ===== */
+.silver { color: #A2A2A2; }
+.g-gray { color: #7E7D80; }
+.g-black { color: #141414; }
+.def-color { color: #14265C; }
+.g-orange { color: #FF8511; }
+
+/* ===== UTILITIES ===== */
+.pointer { cursor: pointer; }
+.topBg { background-color:#F2F5F8; }
+.def-color { color: #14265C; }
+.def-bg { background-color: #14265C; }
+.g-orange { color: #FF8511; }
+
+/* Hide number input arrows globally */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+
+/* ===== RESPONSIVE NAVIGATION ===== */
+@media (min-width: 800px) {
+  .topNavDTop { display: block; }
+  .topNavMobile { display: none; }
+}
+@media (max-width: 799.98px) {
+  .topNavDTop { display: none; }
+  .topNavMobile { display: block; }
+}
