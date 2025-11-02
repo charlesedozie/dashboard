@@ -1,0 +1,184 @@
+/* Remove default calendar border */
+.react-calendar {
+  border: none !important;
+  width: 100% !important;
+  background: white;
+  font-family: sans-serif;
+}
+
+/* Consistent size for weekdays & days */
+.react-calendar__month-view__weekdays__weekday,
+.react-calendar__month-view__days__day {
+  width: 36px !important;
+  height: 36px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+}
+
+
+
+/* Remove underline & change text color */
+.react-calendar__month-view__weekdays {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  color: #9ca3af !important; /* light gray, same as Tailwind text-gray-400 */
+  font-weight: 500; /* optional, make it medium weight */
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove padding around the month grid */
+.react-calendar__month-view {
+  padding: 0 !important;
+}
+
+/* Grid spacing */
+.react-calendar__month-view__days {
+  gap: 0 !important;
+}
+
+/* Today's date style */
+.custom-today {
+  background-color: #FF8511 !important; /* deep orange */
+  color: white !important;
+  border-radius: 50% !important;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #374151 !important; /* same gray as weekdays */
+}
+
+
+/* Remove background for today's date */
+.react-calendar__tile--now {
+  background: none !important;
+  color: inherit !important; /* keep the text color normal */
+  border-radius: 0 !important; /* removes any rounded style */
+}
+
+
+/* Event date style */
+.custom-event {
+  background-color: #4caf50 !important; /* green */
+  color: white !important;
+  border-radius: 50% !important;
+}
+
+/* Hover effect for any date tile */
+.react-calendar__tile:hover {
+  background-color: #e2e8f0 !important; /* light gray */
+  border-radius: 50% !important;
+}
+
+/* Small dot under event dates */
+.event-dot {
+  font-size: 10px;
+  color: white;
+  margin-top: 2px;
+}
+
+/* Popup styling */
+.popup {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  width: 250px;
+  z-index: 50;
+}
+
+.popup-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.popup-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-item {
+  border-bottom: 1px solid #eee;
+  padding: 4px 0;
+}
+
+.popup-item p {
+  font-size: 0.8rem;
+  color: #555;
+  margin: 2px 0 0;
+}
+
+.popup-close {
+  margin-top: 0.5rem;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-close:hover {
+  background: #c53030;
+}
+
+
+
+/* Optional: remove the uppercase style if needed */
+.react-calendar__month-view__weekdays__weekday {
+  text-transform: none !important;
+}
+
+
+.dark-calendar {
+  background-color: #1f2937 !important; /* dark gray */
+  color: #e5e7eb !important; /* light text */
+  border-radius: 8px;
+}
+
+.dark-calendar .react-calendar__tile {
+  color: #d1d5db !important;
+}
+
+.dark-calendar .react-calendar__tile--active {
+  background-color: #2563eb !important; /* blue */
+  color: white !important;
+}
+
+.event-dot {
+  font-size: 12px;
+  line-height: 1;
+}
+
+
+/* Highlight today's date */
+.react-calendar__tile.custom-today {
+  background-color: #ff9800 !important; /* orange */
+  color: white !important;
+  border-radius: 50% !important;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Optional hover effect */
+.react-calendar__tile.custom-today:hover {
+  background-color: #fb8c00 !important;
+}
+
+/* For dark mode */
+.dark .react-calendar__tile.custom-today {
+  background-color: #ffa726 !important;
+  color: #000 !important;
+}
